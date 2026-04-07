@@ -28,5 +28,22 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
             return Ok(product);
         }
+        [HttpGet("seller/{sellerId}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductSBySeller(int sellerId)
+        {
+            var products = await _context.Products
+                .Where(p => p.SellerId == sellerId)
+                .ToListAsync();
+            return Ok(products);
+        }
+        [HttpGet("buyer/{buyerId}")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByBuyer(int buyerId)
+        {
+            var orders = await _context.Orders
+                .Include(o => o.Product)
+                .Where(o => o.BuyerId == buyerId)
+                .ToListAsync();
+            return Ok(orders);
+        }
     }
 }
