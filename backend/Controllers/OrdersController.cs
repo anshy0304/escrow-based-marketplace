@@ -63,5 +63,33 @@ namespace backend.Controllers
                 EscrowStatus = escrow.Status
             });
         }
+        [HttpPost("{orderId}/cancel")]
+        public async Task<ActionResult> CancelOrder(int orderId)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+            if(order == null)
+            {
+                return NotFound("Order Not Found");
+            }
+            if(order.Status != "Pending")
+            {
+                return BadRequest("Only pending orders can be cancelled");
+            }
+            var escrow = await _context.EscrowTransactions
+                .FirstOrDefaultAsync(e => e.OrderId == orderId);
+            if(escrow == null)
+            {
+                return NotFound("Escrow record not found for this order");
+            }
+            order.Status = "Cancelled";
+            escrow.Status = "Refunded";
+            await _context.SaveChangesAsync();
+            return Ok(new
+            {
+                Message = "Order cancelled. Escrow funds have been refunded to the buyer.",
+                OrderStatus = order.Status,
+                EscrowStatus = escrow.Status
+            });
+        }
     }
 }
