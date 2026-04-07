@@ -1,14 +1,17 @@
 ﻿using backend.Data;
 using backend.DTOs;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         private readonly MarketPlaceDbContext _context;
@@ -16,16 +19,24 @@ namespace backend.Controllers
         {
             _context = context;
         }
-        [HttpPost]
+        [HttpPost("checkout")]
         public async Task<ActionResult> Checkout(CheckOutRequestDto request)
         {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                return Unauthorized("Invalid token");
+            }
+            int loggedInBuyerId = int.Parse(userIdString);
             var product = await _context.Products.FindAsync(request.ProductId);
-            if (product == null)
+            if(product == null)
+            {
                 return NotFound("Product Not Found");
+            }
             var newOrder = new Order
             {
                 ProductId = request.ProductId,
-                BuyerId = request.BuyerId,
+                BuyerId = loggedInBuyerId,
                 Status = "Pending"
             };
             _context.Orders.Add(newOrder);
@@ -40,7 +51,7 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
             return Ok(new
             {
-                Message = "Checkout successful! Money is held in Escrow.",
+                Message = "Checkout successfull! Money is held in Escrow",
                 OrderId = newOrder.Id
             });
         }
