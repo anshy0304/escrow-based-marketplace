@@ -25,7 +25,32 @@ function Home() {
       fetchProducts();
   },[]);
 
-  
+  const handleBuy = async (productId) => {
+    const token = localStorage.getItem('token');
+    if(!token){
+      alert("Please log in to purchase items.");
+      navigate('/login');
+      return;
+    }
+    try{
+      const response = await fetch('https://localhost:7093/api/orders/checkout', {
+        method : 'POST',
+        headers: {
+          'Content-Type':'application/json',
+          'Authorization' :`Bearer ${token}`
+        },
+        body : JSON.stringify({
+          productId:productId
+        })
+      });
+      const data = await response.json();
+      if(response.ok){
+        alert("Congrats " + data.message);
+      }else alert(data);
+    }catch(err){
+      alert("Could not connect to the server");
+    }
+  }
 
   return (
     <>
@@ -43,7 +68,9 @@ function Home() {
             </div>
             <div className='flex justify-between items-center mt-4'>
               <span className='text-2xl font-bold text-green-600'>${product.price}</span>
-              <button className='bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition'>
+              <button 
+              onClick={() => handleBuy(product.id)}
+              className='bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition'>
                 Buy Now
               </button>
             </div>
