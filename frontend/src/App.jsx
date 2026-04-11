@@ -1,15 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import { useState } from 'react';
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>Multi-Vendor Marketplace</h1>
+      <Navbar />
+      <div className='p-6'>
+      <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path = "/Login" element = {<Login />}></Route>
+      </Routes>
+      </div>
     </>
   )
 }
