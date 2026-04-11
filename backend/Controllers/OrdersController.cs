@@ -102,5 +102,14 @@ namespace backend.Controllers
                 EscrowStatus = escrow.Status
             });
         }
+        [HttpGet("buyer/{buyerId}")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByBuyer(int buyerId)
+        {
+            var orders = await _context.Orders
+                .Include(o => o.Product)
+                .Where(o => o.BuyerId == buyerId)
+                .ToListAsync();
+            return Ok(orders);
+        }
     }
 }

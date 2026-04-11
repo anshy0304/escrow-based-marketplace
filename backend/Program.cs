@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     {
         // http://localhost:3000 is the default URL for React apps
         // If  use a different port like 5173 (Vite), just change this URL!
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
