@@ -15,7 +15,7 @@ function AddProduct() {
             return;
         }
         try{
-            const response = await fetch('https://localhost:7093/api/products',{
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/products`,{
                 method:'POST',
                 headers  :{
                     'Content-Type' : 'application/json'
