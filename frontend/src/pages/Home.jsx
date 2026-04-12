@@ -51,7 +51,7 @@ function Home() {
         return;
       }
       const options = {
-        key :  "rzp_test_ScFObOzhZ1Qjfe",
+        key :  import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount : data.amount,
         currency : data.currency,
         name : "Ansh's Marketplace",
