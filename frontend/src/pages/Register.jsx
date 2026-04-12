@@ -14,7 +14,7 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${baseURL}/api/auth/register`,{
+            const response = await fetch(`${baseURL}/auth/register`,{
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json',
