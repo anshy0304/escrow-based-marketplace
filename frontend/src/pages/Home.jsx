@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import baseURL from '../api';
 
 function Home() {
+  console.log(baseURL);
   const [products, setProducts] = useState([]);
   const [loading,setLoading] = useState(true);
   const [error,setError] = useState(null);
