@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import baseURL from '../api';
 
 function Dashboard() {
     const [data, setData] = useState([]);
@@ -29,11 +30,11 @@ function Dashboard() {
             try {
                 let response;
                 if (role === 'Seller') {
-                    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/seller/${userId}`, {
+                    response = await fetch(`${baseURL}/orders/seller/${userId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                 } else {
-                    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/buyer/${userId}`, {
+                    response = await fetch(`${baseURL}/orders/buyer/${userId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                 }
@@ -54,7 +55,7 @@ function Dashboard() {
     const handleConfirmDelivery = async (orderId) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/${orderId}/confirm`, {
+            const response = await fetch(`${baseURL}/orders/${orderId}/confirm`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -78,7 +79,7 @@ function Dashboard() {
         }
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/${orderId}/cancel`, {
+            const response = await fetch(`${baseURL}/orders/${orderId}/cancel`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import baseURL from '../api';
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ function Home() {
   useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/products`);
+          const response = await fetch(`${baseURL}/products`);
           if(!response.ok){
             throw new Error("Could not load Products");
           }
@@ -33,7 +34,7 @@ function Home() {
       return;
     }
     try{
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/create-razorpay-order`, {
+      const response = await fetch(`${baseURL}/orders/create-razorpay-order`, {
         method : 'POST',
         headers: {
           'Content-Type':'application/json',
@@ -59,7 +60,7 @@ function Home() {
           color:"#2563EB"
         },
         handler:  async function (response){
-          const confirmRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/checkout`,{
+          const confirmRes = await fetch(`${baseURL}/orders/checkout`,{
             method:'POST',
             headers:{
               'Content-Type' :'application/json',
