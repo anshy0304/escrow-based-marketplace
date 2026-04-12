@@ -129,6 +129,8 @@ namespace backend.Controllers
             if (product == null) return NotFound("Product not found");
             string? keyId = _configuration["Razorpay:KeyId"];
             string? keySecret = _configuration["Razorpay:KeySecret"];
+            if (string.IsNullOrEmpty(keyId) || string.IsNullOrEmpty(keySecret))
+                return BadRequest("Razorpay keys are missing!");
             Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient(keyId, keySecret);
             Dictionary<string, object> options = new Dictionary<string, object>();
             options.Add("amount",(int)(product.Price * 100));
