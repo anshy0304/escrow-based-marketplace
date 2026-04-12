@@ -56,7 +56,7 @@ function Home() {
         currency : data.currency,
         name : "Ansh's Marketplace",
         description:data.productName,
-        order_id:data.order_id,
+        order_id:data.orderId,
         theme:{
           color:"#2563EB"
         },
