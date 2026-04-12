@@ -16,9 +16,10 @@ namespace backend.Controllers
     {
         private readonly MarketPlaceDbContext _context;
         private readonly IConfiguration _configuration;
-        public OrdersController(MarketPlaceDbContext context)
+        public OrdersController(MarketPlaceDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
         [HttpPost("checkout")]
         public async Task<ActionResult> Checkout(CheckOutRequestDto request)
