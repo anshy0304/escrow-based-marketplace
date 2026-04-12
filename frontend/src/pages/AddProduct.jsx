@@ -52,7 +52,7 @@ function AddProduct() {
         </div>
 
         <div>
-          <label className="block text-gray-700 font-medium mb-1">Price ($)</label>
+          <label className="block text-gray-700 font-medium mb-1">Price (₹)</label>
           <input 
             type="number" step="0.01" required placeholder="500.00"
             className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-green-500"
