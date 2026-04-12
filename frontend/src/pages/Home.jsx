@@ -97,7 +97,7 @@ function Home() {
               <p className='text-gray-500 text-sm mb-4'>Sold by: {product.seller.name || "Unknow Seller"}</p>
             </div>
             <div className='flex justify-between items-center mt-4'>
-              <span className='text-2xl font-bold text-green-600'>${product.price}</span>
+              <span className='text-2xl font-bold text-green-600'>₹{product.price}</span>
               <button 
               onClick={() => handleBuy(product.id)}
               className='bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition'>
