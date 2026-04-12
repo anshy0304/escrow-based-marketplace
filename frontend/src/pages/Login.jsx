@@ -13,7 +13,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`${baseURL}/api/auth/login`,{
+            const response = await fetch(`${baseURL}/auth/login`,{
                 method :'Post',
                 headers:{
                     'Content-Type':'application/json',

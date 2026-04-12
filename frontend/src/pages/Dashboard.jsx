@@ -30,11 +30,11 @@ function Dashboard() {
             try {
                 let response;
                 if (role === 'Seller') {
-                    response = await fetch(`${baseURL}/api/orders/seller/${userId}`, {
+                    response = await fetch(`${baseURL}/orders/seller/${userId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                 } else {
-                    response = await fetch(`${baseURL}/api/orders/buyer/${userId}`, {
+                    response = await fetch(`${baseURL}/orders/buyer/${userId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                 }

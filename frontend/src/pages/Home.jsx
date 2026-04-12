@@ -61,7 +61,7 @@ function Home() {
           color:"#2563EB"
         },
         handler:  async function (response){
-          const confirmRes = await fetch(`${baseURL}/api/orders/checkout`,{
+          const confirmRes = await fetch(`${baseURL}/orders/checkout`,{
             method:'POST',
             headers:{
               'Content-Type' :'application/json',
