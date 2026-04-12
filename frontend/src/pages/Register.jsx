@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import baseURL from '../api';
+
 function Register() {
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
@@ -12,7 +14,7 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/register`,{
+            const response = await fetch(`${baseURL}/auth/register`,{
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json',
