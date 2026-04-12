@@ -15,7 +15,7 @@ function AddProduct() {
             return;
         }
         try{
-            const response = await fetch(`${baseURL}/products`,{
+            const response = await fetch(`${baseURL}/api/products`,{
                 method:'POST',
                 headers  :{
                     'Content-Type' : 'application/json'

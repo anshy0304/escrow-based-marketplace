@@ -35,7 +35,7 @@ function Home() {
       return;
     }
     try{
-      const response = await fetch(`${baseURL}/orders/create-razorpay-order`, {
+      const response = await fetch(`${baseURL}/api/orders/create-razorpay-order`, {
         method : 'POST',
         headers: {
           'Content-Type':'application/json',
@@ -61,7 +61,7 @@ function Home() {
           color:"#2563EB"
         },
         handler:  async function (response){
-          const confirmRes = await fetch(`${baseURL}/orders/checkout`,{
+          const confirmRes = await fetch(`${baseURL}/api/orders/checkout`,{
             method:'POST',
             headers:{
               'Content-Type' :'application/json',
