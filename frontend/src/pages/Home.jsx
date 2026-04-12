@@ -33,7 +33,7 @@ function Home() {
       return;
     }
     try{
-      const response = await fetch('https://localhost:7093/api/orders/checkout', {
+      const response = await fetch('https://localhost:7093/api/orders/create-razorpay-order', {
         method : 'POST',
         headers: {
           'Content-Type':'application/json',
@@ -44,9 +44,37 @@ function Home() {
         })
       });
       const data = await response.json();
-      if(response.ok){
-        alert("Congrats " + data.message);
-      }else alert(data);
+      if(!response.ok){
+        alert("Failed to initialize payment");
+        return;
+      }
+      const options = {
+        key :  "rzp_test_ScFObOzhZ1Qjfe",
+        amount : data.amount,
+        currency : data.currency,
+        name : "Ansh's Marketplace",
+        description:data.productName,
+        order_id:data.order_id,
+        theme:{
+          color:"#2563EB"
+        },
+        handler:  async function (response){
+          const confirmRes = await fetch('https://localhost:7093/api/orders/checkout',{
+            method:'POST',
+            headers:{
+              'Content-Type' :'application/json',
+              'Authorization' : `Bearer ${token}`
+            },
+            body: JSON.stringify({productId:productId})
+          });
+          if(confirmRes.ok){
+            alert("Payment Successfull! Funds are locked in escrow");
+            navigate('/dashboard');
+          }else alert("Payment worked,but Escrow failed.Please Contack support");
+        }
+      }
+      const rzp = new window.Razorpay(options);
+      rzp.open();
     }catch(err){
       alert("Could not connect to the server");
     }
