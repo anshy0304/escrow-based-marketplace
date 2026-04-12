@@ -4,8 +4,7 @@ I built this full-stack marketplace to figure out how real-world trust engines a
 
 Instead of a standard e-commerce cart, this project features a custom Escrow system. When a buyer pays, the money is locked. The seller only actually receives the funds in their dashboard after the buyer explicitly confirms the item was delivered. 
 
-Live Demo: [Insert your Frontend Azure App Service URL here]  
-Backend API: [Insert your Backend Azure App Service URL here]
+Live Demo: https://escrow-frontend-ckdgaua0ayhgc4hp.centralindia-01.azurewebsites.net/
 
 ## What I Built
 
