@@ -35,7 +35,7 @@ function Home() {
       return;
     }
     try{
-      const response = await fetch(`${baseURL}/api/orders/create-razorpay-order`, {
+      const response = await fetch(`${baseURL}/orders/create-razorpay-order`, {
         method : 'POST',
         headers: {
           'Content-Type':'application/json',
