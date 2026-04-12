@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await fetch('https://localhost:7093/api/products');
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/products`);
           if(!response.ok){
             throw new Error("Could not load Products");
           }
@@ -33,7 +33,7 @@ function Home() {
       return;
     }
     try{
-      const response = await fetch('https://localhost:7093/api/orders/create-razorpay-order', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/create-razorpay-order`, {
         method : 'POST',
         headers: {
           'Content-Type':'application/json',
@@ -59,7 +59,7 @@ function Home() {
           color:"#2563EB"
         },
         handler:  async function (response){
-          const confirmRes = await fetch('https://localhost:7093/api/orders/checkout',{
+          const confirmRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/checkout`,{
             method:'POST',
             headers:{
               'Content-Type' :'application/json',

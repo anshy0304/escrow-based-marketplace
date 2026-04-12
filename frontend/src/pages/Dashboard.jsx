@@ -29,11 +29,11 @@ function Dashboard() {
             try {
                 let response;
                 if (role === 'Seller') {
-                    response = await fetch(`https://localhost:7093/api/orders/seller/${userId}`, {
+                    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/seller/${userId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                 } else {
-                    response = await fetch(`https://localhost:7093/api/orders/buyer/${userId}`, {
+                    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/buyer/${userId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                 }
@@ -54,7 +54,7 @@ function Dashboard() {
     const handleConfirmDelivery = async (orderId) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`https://localhost:7093/api/orders/${orderId}/confirm`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/${orderId}/confirm`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -78,7 +78,7 @@ function Dashboard() {
         }
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`https://localhost:7093/api/orders/${orderId}/cancel`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/${orderId}/cancel`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
