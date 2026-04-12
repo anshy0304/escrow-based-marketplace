@@ -22,6 +22,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '24.x'
+      - name: Create .env file
+        run: echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" > frontend/.env
 
       - name: npm install, build, and test
         run: |
@@ -63,5 +65,5 @@ jobs:
         with:
           app-name: 'escrow-frontend'
           slot-name: 'Production'
-          package: .
+          package: dist
           
