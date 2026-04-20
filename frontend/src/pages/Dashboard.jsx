@@ -110,7 +110,7 @@ function Dashboard() {
                             <div>
                                 <p className='text-sm text-gray-500'>Order #{order.id}</p>
                                 <h2 className='text-xl font-bold text-blue-600'>{order.product?.name || 'Product'}</h2>
-                                <p className='text-lg font-semibold text-green-600'>${order.product?.price}</p>
+                                <p className='text-lg font-semibold text-green-600'>₹{order.product?.price}</p>
                                 <p className='mt-2 text-sm'>
                                     Status: <span className={`font-bold ${statusColors[order.status] || 'text-gray-500'}`}>
                                         {order.status === 'Pending' ? 'Action Required: Needs Shipping' : order.status}
