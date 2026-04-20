@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <>
         <nav className='bg-blue-600 text-white shadow-md p-4 flex justify-between items-center mb-6'>
-            <h2 className='text-2xl font-bold m-0'>Ansh's MarketPlace</h2>
+            <h2 className='text-2xl font-bold m-0'>MarketPlace</h2>
             <div className='space-x-6 font-medium'>
                 <Link to ="/" className ="hover:text-blue-200 transition">Home</Link>
                 
